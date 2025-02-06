@@ -26,7 +26,7 @@ if uploaded_file is not None:
     df = pd.read_csv(uploaded_file)
 
     df["bmi"].fillna(df["bmi"].median(),inplace=True)
-    
+
 
     work_type_mapping = {
     'Private': 0,
@@ -37,7 +37,10 @@ if uploaded_file is not None:
 
     df["gender"]=le.fit_transform(df["gender"])
     df["ever_married"]=le.fit_transform(df['ever_married'])
-    df["smoking_status"]=le.fit_transform(df["smoking_status"])
+    
+    df["smoking_status_1"] = df["smoking_status_1"].astype(int)
+    df["smoking_status_2"]=df["smoking_status_2"].astype(int)
+    df["smoking_status_3"]=df["smoking_status_3"].astype(int)
 
     df['work_type'] = df['work_type'].map(work_type_mapping)    
     
